@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "model: SG/SF/STCGAN" 
+read model
+
+echo "results: cropped/classic/mixed"
+read results
+
+echo "type: cropped/classic"
+read type
+
+gt_path="../../Results/Texts/GT/$type/"
+rm_path="../../Results/Texts/$model/$results/"
+out_path="../../Results/Metrics/WER/$model/"
+
+rm $out_path"$results"_"$model"_WER.txt
+touch $out_path"$results"_"$model"_WER.txt
+
+array=($(ls $gt_path | sort -h))
+
+for file in "${array[@]}";
+do
+	python3 WER.py -rp $gt_path/$file -hp $rm_path/$file -op $out_path"$results"_"$model"_WER.txt -in $file
+done
+

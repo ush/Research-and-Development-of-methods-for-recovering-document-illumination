@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "model: SG/SF/STCGAN" 
+read model
+
+echo "results: cropped/classic/mixed"
+read results
+
+echo "type: cropped/classic"
+read type
+
+echo "size: medium/full/low"
+read size
+
+gt_path="../../Dataset/test_"$type"/$size/test_C/"
+rm_path="../../Results/Images/$model/$results/"
+out_path="../../Results/Metrics/PSNR/$model/"
+
+rm $out_path"$results"_"$model"_PSNR.txt
+touch $out_path"$results"_"$model"_PSNR.txt
+
+array=($(ls $gt_path | sort -h))
+
+for file in "${array[@]}";
+do
+	python3 PSNR.py --gt_path $gt_path/$file --rm_path $rm_path/$file --out_path $out_path"$results"_"$model"_PSNR.txt --img_num $file
+done
+

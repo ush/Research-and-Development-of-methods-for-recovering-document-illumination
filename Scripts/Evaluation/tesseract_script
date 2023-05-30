@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "model: SF/SG/STCGAN"
+read model
+
+echo "results: cropped/classic/mixed"
+read results
+
+array_rm=($(ls ../../Results/Images/$model/$results/ | sort -h))
+
+out_path="../../Results/Texts/$model/$results/"
+
+rm=0
+for file in "${array_rm[@]}";
+do
+rm=$((rm + 1))
+touch $out_path/$rm.txt
+tesseract ../../Results/Images/$model/$results/$file - -l eng+rus > $out_path/$rm.txt
+done

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "model: SG/SF/STCGAN" 
+read model
+
+echo "results: cropped/classic/mixed"
+read results
+
+echo "type: cropped/classic"
+read type
+
+echo "size: medium/full/low"
+read size
+
+gt_path="../../Dataset/test_"$type"/$size/test_C/"
+rm_path="../../Results/Images/$model/$results/"
+out_path="../../Results/Metrics/RMSE/$model/"
+
+rm $out_path"$results"_"$model"_RMSE.txt
+touch $out_path"$results"_"$model"_RMSE.txt
+
+array=($(ls $gt_path | sort -h))
+
+for file in "${array[@]}";
+do
+	python3 RMSE.py --gt_path $gt_path/$file --rm_path $rm_path/$file --out_path $out_path"$results"_"$model"_RMSE.txt --img_num $file
+done
+

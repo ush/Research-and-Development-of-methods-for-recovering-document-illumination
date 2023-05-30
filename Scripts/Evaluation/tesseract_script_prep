@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "type: classic/cropped"
+read type
+
+
+array_gt=($(ls ../../Dataset/test_"$type"/full/test_C/ | sort -h))
+
+gt=0
+for file in "${array_gt[@]}";
+do
+gt=$((gt + 1))
+out_path_gt="../../Results/Texts/GT/$type/$gt.txt"
+touch $out_path_gt
+tesseract ../../Dataset/test_"$type"/full/test_C/$file - -l eng+rus > $out_path_gt
+done
+
