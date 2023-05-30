@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "type: classic/cropped/mixed"
+read type
+
+sudo conda init bash
+conda activate STCGANenv
+
+if [ $type = 'mixed' ]; then
+	array=($(ls ../../Dataset/test_cropped/full/test_A/ | sort -h))
+
+	for file in "${array[@]}";
+	do
+	python ./test.py -l 750 -dt classic -i ../../Dataset/test_cropped/full/test_A/$file -o ../../Results/Images/STCGAN/mixed/ -rs 1024
+	done
+else
+	array=($(ls ../../Dataset/test_"$type"/full/test_A/ | sort -h))
+
+	for file in "${array[@]}";
+	do
+	python ./test.py -l 750 -dt $type -i ../../Dataset/test_"$type"/full/test_A/$file -o ../../Results/Images/STCGAN/$type/ -rs 1024
+	done
+fi
+
+echo "________________________________"
+echo "First trial is gone! (klac-klac)"
+echo "--------------------------------"

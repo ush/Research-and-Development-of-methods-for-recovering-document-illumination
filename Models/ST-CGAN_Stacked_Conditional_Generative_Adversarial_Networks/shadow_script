@@ -1,0 +1,21 @@
+#!/bin/bash
+
+mode=train
+
+sudo conda init bash
+conda activate STCGANenv
+
+#array=($(ls ../../Dataset/"$mode"_cropped/"$mode"_A_cropped/ | sort -h))
+array=($(ls ../../Dataset/train_cropped/full/train_A/ | sort -h))
+#array=($(ls ../../Dataset/train_cropped/train_A/ | sort -h))
+
+for file in "${array[@]}";
+do
+#python ./test.py -l 1750 -i ../../Dataset/"$mode"_cropped/"$mode"_A_cropped/$file -o ../../Dataset/"$mode"_cropped/"$mode"_B_cropped -rs 512
+python ./test.py -l 1750 -i ../../Dataset/train_cropped/full/train_A/$file -o ../../Dataset/train_cropped/full/train_B/ -rs 512 --output_maps True -dt ""
+#python ./test.py -l 1750 -i ../../Dataset/test_cropped/train_A/$file -o ../../Dataset/test_cropped/train_B/ -rs 512 --output_maps True
+done
+
+echo "________________________________"
+echo "First trial is gone! (klac-klac)"
+echo "--------------------------------"

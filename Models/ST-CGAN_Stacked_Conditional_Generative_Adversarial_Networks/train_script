@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "type: cropped/classic"
+read type
+
+sudo conda init bash
+conda activate STCGANenv
+
+python train.py -dp ../../Dataset/train_$type/full/ -e 750 -dt $type
+
+echo "________________________________"
+echo " Cropped data training is gone! (klac-klac)"
+echo "--------------------------------"
+
