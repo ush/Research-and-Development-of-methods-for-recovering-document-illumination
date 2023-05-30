@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "type: cropped/classic"
+read type
+
+sudo conda init bash
+conda activate SGenv
+
+python train.py --train_path ../../Dataset/train_"$type"/train/ --test_path ../../Dataset/train_"$type"/val/
+

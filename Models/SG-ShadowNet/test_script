@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "type: classic/cropped/mixed"
+read type
+
+#echo "checkpoint num?"
+#read num
+num=200
+
+sudo conda init bash
+conda activate SGenv
+
+if [ $type = 'mixed' ]; then
+	python test.py --generator_1 ./pretrained/classic/netG_1_$num.pth --generator_2 ./pretrained/classic/netG_2_$num.pth --savepath ../../Results/Images/SG/mixed/ --dataroot_A ../../Dataset/test_cropped/medium/test_A/ --dataroot_B ../../Dataset/test_cropped/medium/test_B
+else
+	python test.py --generator_1 ./pretrained/$type/netG_1_$num.pth --generator_2 ./pretrained/$type/netG_2_$num.pth --savepath ../../Results/Images/SG/$type/ --dataroot_A ../../Dataset/test_"$type"/medium/test_A/ --dataroot_B ../../Dataset/test_"$type"/medium/test_B
+fi
+
+
+
+
