@@ -1,0 +1,12 @@
+#!/bin/bash
+
+readarray -t FILES < <(find ./train_A -type f -exec basename {} \; | shuf --random-source=<(yes 32) -n 132 )
+
+for file in "${FILES[@]}";
+do
+	#echo $file
+	mv ./train_A/$file ./test_A/$file
+	mv ./train_B/$file ./test_B/$file
+	mv ./train_C/$file ./test_C/$file
+done
+

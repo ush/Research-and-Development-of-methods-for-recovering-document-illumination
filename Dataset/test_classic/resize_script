@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "mode: train/test"
+read mode
+
+echo "resolution WxH"
+read res
+
+mogrify -resize "$res"! ./"$mode"_A/*.jpg
+mogrify -resize "$res"! ./"$mode"_B/*.jpg
+mogrify -resize "$res"! ./"$mode"_C/*.jpg
+
+

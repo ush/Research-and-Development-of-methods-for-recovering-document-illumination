@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo "mode: test/train"
+read mode
+
+file_num_A=($(ls ./"$mode"_A/ | wc -l))
+file_num_B=($(ls ./"$mode"_B/ | wc -l))
+file_num_C=($(ls ./"$mode"_C/ | wc -l))
+
+array_A=($(ls ./"$mode"_A/ | sort -h))
+array_B=($(ls ./"$mode"_B/ | sort -h))
+array_C=($(ls ./"$mode"_C/ | sort -h))
+
+#array_A=($(ls ./Original/ | sort -h))
+#array_B=($(ls ./Maps/ | sort -h))
+#array_C=($(ls ./Ground-truth/ | sort -h))
+
+i=1
+for file in "${array_A[@]}";
+do
+	mv ./"$mode"_A/$file ./"$mode"_A/$i.jpg
+	i=$((i+1))
+done
+
+j=1
+for file in "${array_B[@]}";
+do
+	mv ./"$mode"_B/$file ./"$mode"_B/$j.jpg
+	j=$((j+1))
+done
+
+c=1
+for file in "${array_C[@]}";
+do
+	mv ./"$mode"_C/$file ./"$mode"_C/$c.jpg
+	c=$((c+1))
+done
