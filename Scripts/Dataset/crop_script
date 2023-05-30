@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo -n "mode: train/test "
+read mode
+
+echo "size: medium/full/low"
+read size
+
+sudo conda init bash
+conda activate deeplabV3
+
+array_A=($(ls ../../Dataset/"$mode"_classic/$size/"$mode"_A/ | sort -h))
+
+for file in "${array_A[@]}";
+do
+python ./DeepLabV3/app.py --input_file ../../Dataset/"$mode"_classic/$size/"$mode"_A/$file  --output_file ../../Dataset/"$mode"_cropped/$size/"$mode"_A/$file
+done
+
+array_C=($(ls ../../Dataset/"$mode"_classic/$size/"$mode"_C/ | sort -h))
+
+for file in "${array_C[@]}";
+do
+python ./DeepLabV3/app.py --input_file ../../Dataset/"$mode"_classic/$size/"$mode"_C/$file  --output_file ../../Dataset/"$mode"_cropped/$size/"$mode"_C/$file
+done
