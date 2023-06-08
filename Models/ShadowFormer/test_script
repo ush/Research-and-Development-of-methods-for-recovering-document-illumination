@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "type: classic/cropped/mixed"
+read type
+
+echo "model?"
+read model
+
+sudo conda init bash
+conda activate SF
+
+if [ $type = 'mixed' ]; then
+	python test.py --weights ./models/classic/$model.pth --input_dir ../../Dataset/test_cropped/low/ --result_dir ../../Results/Images/SF/mixed/ --save_images
+else
+	python test.py --weights ./models/$type/$model.pth --input_dir ../../Dataset/test_"$type"/low/ --result_dir ../../Results/Images/SF/$type/ --save_images
+fi
+

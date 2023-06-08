@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo conda init bash
+conda activate SF
+
+python train.py --warmup --win_size 10 --train_ps 320
+
+echo "________________________________"
+echo "Training trial is gone! (klac-klac)"
+echo "--------------------------------"
