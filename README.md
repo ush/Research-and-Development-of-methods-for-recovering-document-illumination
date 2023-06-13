@@ -22,3 +22,5 @@ Pretrained [weights](https://disk.yandex.com/d/k-5UzQQk75zF2Q)
 Used [datasets](https://disk.yandex.com/d/uyfjBuNNsy1Jxg)
 
 Archive [datasets](https://disk.yandex.com/d/bHY_F6nrjLndEQ)
+
+Texts, Images and Metrics [results](https://disk.yandex.com/d/MLFpcD-DwBCyxg)
